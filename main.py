@@ -1,3 +1,4 @@
+from curses.ascii import US
 from tkinter import *
 from tkinter import ttk as ttk
 
@@ -60,7 +61,7 @@ def iniciarSesion():
     """
     Esta funcion es el evento para el boton iniciar sesion 
     """
-    pass
+    User.login()
 
 def registrarUsuario():
     """

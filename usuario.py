@@ -1,3 +1,4 @@
+import logging
 import random
 
 def AccountNumberGenerator() -> int:
@@ -19,7 +20,6 @@ def AccountNumberGenerator() -> int:
     
 
     return numberAccount
-
 
 def generatepassword() -> int:
     """
@@ -50,6 +50,41 @@ def generatepassword() -> int:
     contra = "".join(password)   #convertimos la lista en un str
     
     return contra
+
+def ValidarContraseña(validacionContraseña):
+    """
+    Esta funcion valida la contraseña de un usuario
+    """
+    if validacionContraseña == self.password:
+        print(f"{self.name} bienvenido al sistema bancario")
+        return True
+
+    else:
+        self.intento -= 1
+        #Aqui le daremos al usuario la capacidad de cambiar la contraseña en el ultimo inetento
+        if self.intentos > 1:
+            print("Contraseña incorrecta, intentelo de nuevo")
+            print(f"Tienes {self.intentos} intentos restantes")
+            self.login()
+
+        elif self.intentos <1:
+            print("¿Olvidaste tu contraseña?")
+
+            ContraseñaOlvidada = input()
+
+            ContraseñaOlvidadaCONSOLE = ContraseñaOlvidada.lower()
+
+            if ContraseñaOlvidadaCONSOLE == "si":
+                newPassword = input("Tu nueva contraseña debe tener al menos 9 caracteres\nIngresa tu nuva contraseña: ")
+                # Evalua la condicion
+                if len(newPassword) >= 9:
+                    newPassword = self.password
+                else:
+                    self.login()
+            else:
+                self.login()
+
+
 class User():
     pass
 
@@ -92,55 +127,50 @@ class User():
             else:
                 pass
 
-
         self.account_number = AccountNumberGenerator()
 
         self.isRegistered = True
-
 
         print(f"Tu registro: Te llamas {self.name}, con cuenta número {self.account_number} y contraseña {self.password}")
-
-        self.account_number = AccountNumberGenerator()
-
-        self.isRegistered = True
 
         return self.name,self.password,self.account_number,self.isRegistered
 
 
-    def login(self):
+    def login(self,paSSword=None):
         """
         Este atributo permite al usuario iniciar sesion siempre y cuando exista una cuenta registrada
         """
-        print(f"Hey! {self.name} Bienvenido al Banco de ColoTube\nPara comprobar que eres tu, por favor danos tu contraseña ")
 
-        validacionContraseña = input()
+        if paSSword == None:
+            print(f"Hey! {self.name} Bienvenido al Banco de ColoTube\nPara comprobar que eres tu, por favor danos tu contraseña ")
 
-        if validacionContraseña == self.password:
-            print(f"{self.name} bienvenido al sistema bancario")
-            self.isConected = True
-        else:
-            self.intento =- 1
-            #Aqui le daremos al usuario la capacidad de cambiar la contraseña en el ultimo inetento
-            if self.intentos > 1:
-                print("Contraseña incorrecta, intentelo de nuevo")
-                print(f"Tienes {self.intentos} intentos restantes")
+            contraseña = input("")
+            
+            validacionContraseña = ValidarContraseña(contraseña)
+            if validacionContraseña ==  True:
+                self.isConected = True
+                self.conectar()
+            
+            else:
                 self.login()
+            
+        elif paSSword == self.password:
+            self.isConected  = True
+            self.conectar()
 
-            elif self.intentos <1:
-                print("¿Olvidaste tu contraseña?")
+        else:
+            self.login()
 
-                ContraseñaOlvidada = input()
+    def conectar(self):
+        if self.isConected == True:
+            pass
 
-                ContraseñaOlvidadaCONSOLE = ContraseñaOlvidada.lower()
+        elif self.isConected == False:
+            pass
 
-                if ContraseñaOlvidadaCONSOLE == "si":
-                    newPassword = input("Tu nueva contraseña debe tener al menos 9 caracteres\nIngresa tu nuva contraseña: ")
-                    # Evalua la condicion
-                    if len(newPassword) >= 9:
-                        newPassword = self.password
-                    else:
-                        pass
-                else:
-                    self.login()
+        else:
+            self.login
 
+
+            
 
