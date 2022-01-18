@@ -7,15 +7,16 @@ def AccountNumberGenerator() -> int:
     Esto lo hace comprobando que cada numero de cuenta sea distinto para cada usuario 
     """
 
-    possibleNumbers = [1,2,3,4,5,6,7,8,9,0]
+    possibleNumbers = ["1","2","3","4","5","6","7","8","9","0"]
 
-    listForAccoun = []
+    listForAccount = []
 
     for i in range(9):
         union = random.choice(possibleNumbers)
-        listForAccoun.append(union)
+        listForAccount.append(union)
 
-    numberAccount = "".join(listForAccoun)
+    numberAccount = "".join(listForAccount)
+    
 
     return numberAccount
 
@@ -71,11 +72,11 @@ class User():
         """
 
         print("Hey! Bienvenido al Banco de ColoTube, vamos a registarte")
-        name = input("Por favor ingrese su nombre: ")
+        self.name = input("Por favor ingrese su nombre: ")
 
         #Genera la contraseña al usuario
-        password = generatepassword()
-        print(f"Por favor recuerda esta contraseña segura: {password}")
+        self.password = generatepassword()
+        print(f"Por favor recuerda esta contraseña segura: {self.password}")
 
         #Le pregunta al usuario que si quiere cambiar la contraseña
         print("La contraseña que te dimos cumple con altos estandares de seguridad")
@@ -87,15 +88,23 @@ class User():
             newPassword = input("Tu nueva contraseña debe tener al menos 9 caracteres\nIngresa tu nuva contraseña: ")
             # Evalua la condicion
             if len(newPassword) >= 9:
-                newPassword = password
+                newPassword = self.password
             else:
                 pass
 
-        account_number = AccountNumberGenerator()
 
-        isRegistered = True
+        self.account_number = AccountNumberGenerator()
 
-        return name,password,account_number,isRegistered
+        self.isRegistered = True
+
+
+        print(f"Tu registro: Te llamas {self.name}, con cuenta número {self.account_number} y contraseña {self.password}")
+
+        self.account_number = AccountNumberGenerator()
+
+        self.isRegistered = True
+
+        return self.name,self.password,self.account_number,self.isRegistered
 
 
     def login(self):
@@ -110,9 +119,9 @@ class User():
             print(f"{self.name} bienvenido al sistema bancario")
             self.isConected = True
         else:
-            intento =- 1
+            self.intento =- 1
             #Aqui le daremos al usuario la capacidad de cambiar la contraseña en el ultimo inetento
-            if self.intentos >1:
+            if self.intentos > 1:
                 print("Contraseña incorrecta, intentelo de nuevo")
                 print(f"Tienes {self.intentos} intentos restantes")
                 self.login()
@@ -134,10 +143,4 @@ class User():
                 else:
                     self.login()
 
-    def __str__(self):
-        if self.isConected == True:
-            print()
 
-julian = User(None,None,None)
-julian.registrarUsuario()
-print(julian)
