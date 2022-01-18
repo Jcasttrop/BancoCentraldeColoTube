@@ -48,7 +48,7 @@ def generatepassword() -> int:
 
     contra = "".join(password)   #convertimos la lista en un str
     
-    return password
+    return contra
 class User():
     pass
 
@@ -59,7 +59,17 @@ class User():
 
         self.isRegistered = False
 
+        self.intentos = 3
+
+        self.isConected = False
+
     def registrarUsuario(self):
+        """
+        Este atributo permite al usuario registarse
+
+        Devuelve: name, password y numero de cuenta
+        """
+
         print("Hey! Bienvenido al Banco de ColoTube, vamos a registarte")
         name = input("Por favor ingrese su nombre: ")
 
@@ -70,13 +80,13 @@ class User():
         #Le pregunta al usuario que si quiere cambiar la contraseña
         print("La contraseña que te dimos cumple con altos estandares de seguridad")
 
-        eleccionCambioContraseña = input("¿Deseas personalizar tu contraseña?" )
+        eleccionCambioContraseña = input("¿Deseas personalizar tu contraseña? " )
         eleccionCambioContraseñaCONSOLA = eleccionCambioContraseña.lower()
 
         if eleccionCambioContraseñaCONSOLA == "si":
             newPassword = input("Tu nueva contraseña debe tener al menos 9 caracteres\nIngresa tu nuva contraseña: ")
             # Evalua la condicion
-            if len(password) >= 9:
+            if len(newPassword) >= 9:
                 newPassword = password
             else:
                 pass
@@ -85,13 +95,49 @@ class User():
 
         isRegistered = True
 
-        
-    def login(self):
-        print(f"Hey! {name} Bienvenido al Banco de ColoTube")
-        
+        return name,password,account_number,isRegistered
 
-    if isRegistered == False:
-        registrarUsuario()
-    
-    else:
-        login()
+
+    def login(self):
+        """
+        Este atributo permite al usuario iniciar sesion siempre y cuando exista una cuenta registrada
+        """
+        print(f"Hey! {self.name} Bienvenido al Banco de ColoTube\nPara comprobar que eres tu, por favor danos tu contraseña ")
+
+        validacionContraseña = input()
+
+        if validacionContraseña == self.password:
+            print(f"{self.name} bienvenido al sistema bancario")
+            self.isConected = True
+        else:
+            intento =- 1
+            #Aqui le daremos al usuario la capacidad de cambiar la contraseña en el ultimo inetento
+            if self.intentos >1:
+                print("Contraseña incorrecta, intentelo de nuevo")
+                print(f"Tienes {self.intentos} intentos restantes")
+                self.login()
+
+            elif self.intentos <1:
+                print("¿Olvidaste tu contraseña?")
+
+                ContraseñaOlvidada = input()
+
+                ContraseñaOlvidadaCONSOLE = ContraseñaOlvidada.lower()
+
+                if ContraseñaOlvidadaCONSOLE == "si":
+                    newPassword = input("Tu nueva contraseña debe tener al menos 9 caracteres\nIngresa tu nuva contraseña: ")
+                    # Evalua la condicion
+                    if len(newPassword) >= 9:
+                        newPassword = self.password
+                    else:
+                        pass
+                else:
+                    self.login()
+
+    def __str__(self):
+        if self.isConected == True:
+            print()
+
+julian = User(None,None,None)
+julian.registrarUsuario()
+print(julian)
