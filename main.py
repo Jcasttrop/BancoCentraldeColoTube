@@ -1,6 +1,3 @@
-from cgitb import text
-from curses.ascii import US
-from json.tool import main
 from tkinter import *
 from tkinter import ttk as ttk
 
@@ -54,7 +51,7 @@ def createGUI():
                                                     #Con command llamamos la funcion que ejecutara el boton 
     LoginButton.grid(column=2,row=3,ipadx=5,ipady=5,padx=10,pady=10)
 
-    RegisterButton = ttk.Button(mainFrame,text="Registar un usuario")
+    RegisterButton = ttk.Button(mainFrame,text="Registar un usuario",command=registrarUsuario)
     RegisterButton.grid(column=1,row=3,ipadx=5,ipady=5,padx=10,pady=10)
 
     root.mainloop()
@@ -65,10 +62,16 @@ def iniciarSesion():
     """
     pass
 
+def registrarUsuario():
+    """
+    Esta funcion es el evento para el boton registrar usuario
+    """
+    pass
+
 if __name__ == "__main__":
 
     ## Aqui lo creamos manualmente, pero la gracia seria hacerlo por si solo con el login que definimos 
-    user1 = User(input("Ingrese su nombre: ", input("Ingrese su contraseña: ", input("Ingrese su numero de cuenta: "))))
+    user1 = User(input("Ingrese su nombre: "), input("Ingrese su contraseña: "), input("Ingrese su numero de cuenta: "))
 
     createGUI()
 
