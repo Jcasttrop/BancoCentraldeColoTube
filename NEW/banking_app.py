@@ -1,3 +1,5 @@
+#Funciones de uso
+
 def _AccountNumberGenerator():
         """
         Esta funcion genera un numero de cuenta unico a cada usuario
@@ -31,6 +33,8 @@ class User():
         self.age = age
         self.gender = gender
 
+        self._Anumber = _AccountNumberGenerator()
+
     def show_user_details(self):
         """
         Esta funcion le devuelve los user details usando los parametros inicializadores
@@ -41,7 +45,8 @@ class User():
         print("Name: ",self.name)
         print("Age: ", self.age)
         print("Gender: ", self.gender)
-    
+        print("Account nunmber:", self._Anumber)
+
 class Bank(User):
 
     def __init__(self, name, age, gender):
@@ -54,9 +59,7 @@ class Bank(User):
 
     def Show_Account_Number(self):
 
-        self.number = _AccountNumberGenerator()
-
-        print("Yor account number is: ", self.number)
+        print("Yor account number is: ", self._Anumber)
 
     def deposit(self, amount):
         """
@@ -95,4 +98,5 @@ class Bank(User):
 
 
 Julian = Bank("Julian", 18, "M")
+Julian.show_user_details()
 Julian.Show_Account_Number()
