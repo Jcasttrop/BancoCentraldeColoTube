@@ -68,7 +68,7 @@ class Bank(User):
         Esta funcion le permite al usuario depositar dinero a su cuenta
         """
 
-        self.ammount = amount
+        self.amount = amount
         self.balance = self.balance + amount
 
         print("Account Balance Has Been Updated, your new balance is: ", self.balance)
@@ -90,4 +90,11 @@ class Bank(User):
             self.balance = self.balance - self.amount
             print("Account balance has been updated: ", self.balance)
 
+
+
+    def view_balance(self):
+        """
+        Esta funcion le enseña al usuario su balance
+        """
+        print("Your Balance is: ", self.balance)
 
