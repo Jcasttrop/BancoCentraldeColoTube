@@ -1,19 +1,22 @@
-"""
-Vamos a tener dos clases de usuarios:
--Parent (
-    -Holds details about an user
-    -Has a function to show user details
-)
+def _AccountNumberGenerator():
+        """
+        Esta funcion genera un numero de cuenta unico a cada usuario
+        Esto lo hace comprobando que cada numero de cuenta sea distinto para cada usuario 
+        """
 
--Child (
-    -Stores details about the account balance
-    -Store details about the amount
-    -Allows for deposit 
-)
-"""
+        import random
 
-#Clase padre
+        possibleNumbers = ["1","2","3","4","5","6","7","8","9","0"]
 
+        listForAccount = []
+
+        for i in range(9):
+            union = random.choice(possibleNumbers)
+            listForAccount.append(union)
+
+        numberAccount = "".join(listForAccount)
+
+        return numberAccount
 
 
 class User():
@@ -28,9 +31,6 @@ class User():
         self.age = age
         self.gender = gender
 
-    
-    #Una nueva funcion que tendrá la clase
-
     def show_user_details(self):
         """
         Esta funcion le devuelve los user details usando los parametros inicializadores
@@ -41,18 +41,7 @@ class User():
         print("Name: ",self.name)
         print("Age: ", self.age)
         print("Gender: ", self.gender)
-
-"""
-#Creamos el User Julian
-Julian = User("Julian", 18, "M")
-
-#Usamos la funcion definida dentro del objeto
-Julian.show_user_details()
-"""
-
-#Clases hijas
-
-#Child Class
+    
 class Bank(User):
 
     def __init__(self, name, age, gender):
@@ -62,6 +51,12 @@ class Bank(User):
         #Cada usuario tendrá un balance por defecto de 0
         self.balance = 0
 
+
+    def Show_Account_Number(self):
+
+        self.number = _AccountNumberGenerator()
+
+        print("Yor account number is: ", self.number)
 
     def deposit(self, amount):
         """
@@ -98,3 +93,6 @@ class Bank(User):
         """
         print("Your Balance is: ", self.balance)
 
+
+Julian = Bank("Julian", 18, "M")
+Julian.Show_Account_Number()
