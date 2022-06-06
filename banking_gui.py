@@ -9,7 +9,46 @@ master = Tk()
 master.title("Banco Central de ColoTube")
 
 
-#Functions
+
+    #FUNCTIONS
+
+def finish_registation():
+
+    #De las variables temporales en registraton, las vamos asignar a las de verdadero uso
+
+    name = temp_name.get()
+    age = temp_age.get()
+    gender = temp_gender.get()
+    password = temp_password.get()
+
+    #Cada usuario generará un archivo, nosotros debemos estar seguros de que no hayan dos personas con el mismo nombre
+    all_accounts = os.listdir()
+
+
+    #Comprobamos que todo el formulario esté lleno
+    if name == "" or age == "" or gender == "" or password == "":
+        notifications.config(fg="red", text="All fields are required")
+        return
+    else:
+        print(f"Welcome {name} to the bank of people")
+
+
+    #Comprobamos que la cuenta exista 
+    for name_check in all_accounts:
+        if name == name_check:
+            notifications.config(fg="red", text="Account alredy exist")
+            return
+        else:
+            new_file = open(name, "w")
+            new_file.write(name+"\n")
+            new_file.write(age+"\n")
+            new_file.write(password+"\n")
+            new_file.write(gender+"\n")
+            new_file.close()
+
+            notifications.config(fg="green", text="Registration Succesful")
+
+
 def Register():
 
     #VARIABLES
@@ -24,34 +63,7 @@ def Register():
     temp_gender = StringVar()
     temp_password = StringVar()
 
-
-
-    #FUNCTIONS
-
-    def finish_registation():
-
-        #De las variables temporales en registraton, las vamos asignar a las de verdadero uso
-
-        name = temp_name.get()
-        age = temp_age.get()
-        gender = temp_gender.get()
-        password = temp_password.get()
-
-
-        #Comprobamos que todo el formulario esté lleno
-        if name == "" or age == "" or gender == "" or password == "":
-            notifications.config(fg="red", text="All fields are required")
-            return
-        print(f"Welcome {name} to the bank of people")
-
-
-
-        #Cada usuario generará un archivo, nosotros debemos estar seguros de que no hayan dos personas con el mismo nombre
-        all_accounts = os.listdir()
-        
-
-
-    
+       
     #Creamos un pop-up window
     register_screen = Toplevel(master)
 
@@ -91,17 +103,17 @@ def Login():
 
 
 
-#IMAGE IMPORT
-img = Image.open("BCT1.jpg")
-img = img.resize((150,150))
-img = ImageTk.PhotoImage(img)
+# #IMAGE IMPORT
+# img = Image.open("BCT1.jpg")
+# img = img.resize((150,150))
+# img = ImageTk.PhotoImage(img)
 
 
 #Labels
 Label(master, text="Banco Cetral de ColoTube", font=("Calibri",14)).grid(row=0, sticky=N, pady=10)
 Label(master, text="El banco de la gente", font=("Calibri",10)).grid(row=1, sticky=N)
 
-Label(master, image=img).grid(row=2, sticky=N, pady=16)
+#Label(master, image=img).grid(row=2, sticky=N, pady=16)
 
 
 #Buttons
