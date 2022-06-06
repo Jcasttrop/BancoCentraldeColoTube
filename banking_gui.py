@@ -99,7 +99,38 @@ def Register():
 
 
 def Login():
-    pass
+    
+    #VARIABLES
+
+    global temp_login_name
+    global temp_login_password
+    global login_notifications
+    global login_acreen
+
+    temp_login_password = StringVar()
+    temp_login_name = StringVar()
+
+
+    #POP UP PARA LOGIN
+
+    login_screen = Toplevel(master)
+    login_screen.title("Login")
+
+
+    #LABELS
+    Label(login_screen, text="Login to your account", font=("Calibri",12)).grid(row=0, sticky=N, pady=10)
+    Label(login_screen, text="Username", font=("Calibri",12)).grid(row=1, sticky=W, pady=10)
+    Label(login_screen, text="Password", font=("Calibri",12)).grid(row=2, sticky=W, pady=10)
+    
+
+    #Login notifications
+    login_notifications = Label(login_screen, font=("Calibri",12))
+    login_notifications.grid(row=4, sticky=N)
+
+
+    #Entry
+    Entry(login_screen, textvariable=temp_login_name).grid(row=1, column=1, padx=5)
+    Entry(login_screen, textvariable=temp_login_password).grid(row=2, column=1, padx=5)
 
 
 
